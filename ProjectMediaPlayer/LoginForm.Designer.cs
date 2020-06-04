@@ -45,6 +45,7 @@
             this.textUsername.Name = "textUsername";
             this.textUsername.Size = new System.Drawing.Size(206, 20);
             this.textUsername.TabIndex = 0;
+            this.textUsername.Text = "admin";
             // 
             // textPassword
             // 
@@ -52,6 +53,7 @@
             this.textPassword.Name = "textPassword";
             this.textPassword.Size = new System.Drawing.Size(206, 20);
             this.textPassword.TabIndex = 1;
+            this.textPassword.Text = "admin";
             this.textPassword.UseSystemPasswordChar = true;
             // 
             // btnCreateUser

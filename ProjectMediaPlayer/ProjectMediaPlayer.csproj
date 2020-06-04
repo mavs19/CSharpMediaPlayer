@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DoublyLinkedList.cs" />
     <Compile Include="HashComputer.cs" />
     <Compile Include="MediaPlayerForm.cs">
       <SubType>Form</SubType>
@@ -54,6 +55,7 @@
       <DependentUpon>MediaPlayerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MockUserRepository.cs" />
+    <Compile Include="Node.cs" />
     <Compile Include="PasswordManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

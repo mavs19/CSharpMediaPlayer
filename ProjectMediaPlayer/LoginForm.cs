@@ -21,6 +21,7 @@ namespace ProjectMediaPlayer
         public FormLogin()
         {
             InitializeComponent();
+            CreateAdminUser();
         }
 
         private void BtnCreateUser_Click(object sender, EventArgs e)
@@ -62,6 +63,21 @@ namespace ProjectMediaPlayer
             }
             textUsername.Clear();
             textPassword.Clear();
+        }
+
+        private void CreateAdminUser()
+        {
+            username = "admin";
+            password = "admin";
+            string passwordHash = pwManager.GeneratePasswordHash(password, out string salt);
+            User user = new User
+            {
+                UserId = username,
+                PasswordHash = passwordHash,
+                Salt = salt
+
+            };
+            userRepo.AddUser(user);
         }
     }
 }
