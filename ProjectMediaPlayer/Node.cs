@@ -12,8 +12,8 @@ namespace ProjectMediaPlayer
         // The String title and path are the song attributes
         public Node prev;
         public Node next;
-        public string title;
-        public string path;
+        public string title { get; set; }
+        public string path { get; set; }
 
         // Default constructor
         public Node()

@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using CsvHelper;
 
 namespace ProjectMediaPlayer
 {
@@ -84,8 +80,8 @@ namespace ProjectMediaPlayer
             using (OpenFileDialog ofd = new OpenFileDialog()
             {
                 Multiselect = true,
-                Filter = "MP3|*.mp3"
-                //Filter = "WMV|*.wmv|WAV|*wav|MP3|*.mp3|MP4|*.mp4|MKV|*.mkv"
+                //Filter = "MP3|*.mp3"
+                Filter = "WMV|*.wmv|WAV|*wav|MP3|*.mp3|MP4|*.mp4|MKV|*.mkv"
             })
             {
                 if (ofd.ShowDialog() == DialogResult.OK)
@@ -110,12 +106,47 @@ namespace ProjectMediaPlayer
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-
+            using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "CSV|*.csv", ValidateNames = true })
+            {
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    using (var sw = new StreamWriter(sfd.FileName))
+                    using (var writer = new CsvWriter(sw, CultureInfo.InvariantCulture))
+                    {
+                        List<Node> records = new List<Node>();
+                        Node temp = playlist.head;
+                        while (temp != null)
+                        {
+                            records.Add(temp);
+                            temp = temp.next;
+                        }
+                        writer.WriteRecords(records);
+                    }
+                    toolStripStatusLabel.Text = "Data has been saved to CSV";
+                }
+            }
         }
 
         private void ButtonLoad_Click(object sender, EventArgs e)
         {
-
+            using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "CSV|*.csv", ValidateNames = true })
+            {
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    using (var sr = new StreamReader(new FileStream(ofd.FileName, FileMode.Open)))
+                    using (var reader = new CsvReader(sr, CultureInfo.InvariantCulture))
+                    {
+                        IEnumerable<Node> records = reader.GetRecords<Node>();
+                        foreach (Node item in records)
+                        {
+                            playlist.AddLast(item.title, item.path);
+                        }
+                        DisplayPlayList();
+                    
+                    }
+                    toolStripStatusLabel.Text = "CSV file successfully opened";
+                }
+            }
         }
 
         private void ListBoxPlaylist_SelectedIndexChanged(object sender, EventArgs e)
