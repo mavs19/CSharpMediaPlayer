@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ProjectMediaPlayer
 {
@@ -11,6 +12,7 @@ namespace ProjectMediaPlayer
         // Node listHead set globally to the node at front of list
         public Node head;
         public Node last = null;
+        public Node tail;
         //public Node current;
 
         //    //Doubly Linked list Node
@@ -49,7 +51,6 @@ namespace ProjectMediaPlayer
 
             if (prevNode == null)
             {
-                //Messa("The given previous node cannot be NULL ");
                 return;
             }
             Node newNode = new Node(newTitle, newPath);
@@ -68,6 +69,7 @@ namespace ProjectMediaPlayer
         {
 
             Node newNode = new Node(newTitle, newPath);
+            tail = newNode;
             last = head;
             newNode.next = null;
             if (head == null)
@@ -155,61 +157,76 @@ namespace ProjectMediaPlayer
             }
         }
 
-        // Method to complete a binary search using a node and string as arguments
+        // Method to assign the last the last item on the list to the variable node
+        // Returns this value for the purpose of the Binary search
+        public Node FindTail(Node node)
+        {
+            while (node.next != null)
+            {
+                node = node.next;
+            }
+            return node;
+        }
+
+        // Method to complete a binary search using a string as argument
         // returns null if the list to search is empty
         // While loop to iterate until reached end 
         // If blocks compare if the target match the middle, next to or previous to middle
-        // If not found new lastNode node (null) will become the next to meddle or first will become middle
         // Continues until found which will return the node, or return null ifnot found
-        public Node BinarySearch(Node newHead, string target)
+        public Node BinarySearch(string target)
         {
-            head = newHead;
             try
             {
                 if (head == null)
                 {
-                    //System.out.println("No list to search!!!");
                     return null;
                 }
                 Node first = head;
-                Node lastNode = null;
-                while (lastNode != null || first != lastNode)
+                Node lastNode = FindTail(head);
+                while (first != lastNode)
                 {
                     Node middle = GetMiddle(first, lastNode);
-                    //System.out.println("Target : " + target);
-                   // System.out.println("Middle : " + middle.title);
-                    //System.out.println("First : " + first.title);
                     if (middle.title.Equals(target))
                     {
-                        //System.out.println("Target found at mid : " + target);
                         return middle;
                     }
-                    else if (middle.prev.title.Equals(target))
+                    else if (middle.title.CompareTo(target) < 0)
                     {
-                        //System.out.println("Found at prev : " + target);
-                        return middle.prev;
-                    }
-                    else if (middle.next.title.Equals(target))
-                    {
-                        //System.out.println("Found at next : " + target);
-                        return middle.next;
+                        if (middle.next != null)
+                        {
+                            first = middle.next;
+                        }
+                        else
+                        {
+                            first = middle;
+                        }
                     }
                     else if (middle.title.CompareTo(target) > 0)
                     {
-                        lastNode = middle.next;
+                        if (middle.prev != null)
+                        {
+                            lastNode = middle.prev;
+                        }
+                        else
+                        {
+                            lastNode = middle;
+                        }
                     }
-                    else
-                    {
-                        first = middle;
-                    }
+                    
+                }
+                if (first.title.Equals(target))
+                {
+                    return first;
+                }
+                else
+                {
+                    return null;
                 }
             }
             catch (NullReferenceException e)
             {
-                //System.out.println("Song not found");
                 return null;
             }
-            return null;
         }
 
         // Method to find the middle but taking two arguments, used in the binary search 
@@ -221,7 +238,7 @@ namespace ProjectMediaPlayer
                 return null;
             }
             Node fast = first, slow = first;
-            while (fast != last && fast.next != last)
+            while ((!(fast.title.Equals(last.title))) && (!(fast.next.title.Equals(last.title))))
             {
                 fast = fast.next.next;
                 slow = slow.next;
@@ -234,7 +251,7 @@ namespace ProjectMediaPlayer
         // If the target matches head, the new head will be the node next to current head
         // If the node next to target isn't null, the target node becomes the node previous to target
         // If the node previous to target isn't null, the target node becomes the node next to target
-        // A node is returned of teh updated list
+        // A node is returned of the updated list
         public Node Delete(Node newHead, string target)
         {
 
@@ -281,18 +298,5 @@ namespace ProjectMediaPlayer
             return result;
         }
 
-        // Method to print the list for testing purposes
-        public void Printlist(Node node)
-        {
-            Node lastNode = null;
-
-            while (node != null)
-            {
-                //System.out.print(node.title + "\n");
-                lastNode = node;
-                node = node.next;
-            }
-            //System.out.println();
-        }
     }
 }

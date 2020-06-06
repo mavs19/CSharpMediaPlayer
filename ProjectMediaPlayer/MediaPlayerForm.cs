@@ -21,11 +21,13 @@ namespace ProjectMediaPlayer
         private void ButtonPlay_Click(object sender, EventArgs e)
         {
             axWindowsMediaPlayer.Ctlcontrols.play();
+            toolStripStatusLabel.Text = "Now playing : " + currentSong.title;
         }
 
         private void ButtonPause_Click(object sender, EventArgs e)
         {
             axWindowsMediaPlayer.Ctlcontrols.pause();
+            toolStripStatusLabel.Text = currentSong.title + " has been paused.";
         }
 
         private void ButtonNext_Click(object sender, EventArgs e)
@@ -33,10 +35,12 @@ namespace ProjectMediaPlayer
             try
             {
                 listBoxPlaylist.SelectedItem = currentSong.next.title;
+                toolStripStatusLabel.Text = "Now playing : " + currentSong.title;
             }
             catch (NullReferenceException)
             {
-                toolStripStatusLabel.Text += "Error";
+                //toolStripStatusLabel.Text = "";
+                toolStripStatusLabel.Text = "Now playing : " + currentSong.title + " [End of the list has been reached]";
             }
         }
 
@@ -45,10 +49,12 @@ namespace ProjectMediaPlayer
             try
             {
                 listBoxPlaylist.SelectedItem = currentSong.prev.title;
+                toolStripStatusLabel.Text = "Now playing : " + currentSong.title;
             } 
             catch (NullReferenceException)
             {
-                toolStripStatusLabel.Text += "Error";
+                toolStripStatusLabel.Text = "Now playing : " + currentSong.title + " [Start of the list has been reached]";
+                //toolStripStatusLabel.Text += "There are no songs previous to the current track.";
             }
             
         }
@@ -56,6 +62,7 @@ namespace ProjectMediaPlayer
         private void ButtonStop_Click(object sender, EventArgs e)
         {
             axWindowsMediaPlayer.Ctlcontrols.stop();
+            toolStripStatusLabel.Text = "";
         }
 
         private void ButtonDelete_Click(object sender, EventArgs e)
@@ -66,6 +73,7 @@ namespace ProjectMediaPlayer
                 string selectedSong = listBoxPlaylist.SelectedItem.ToString();
                 playlist.head = playlist.Delete(playlist.head, selectedSong);
                 axWindowsMediaPlayer.Ctlcontrols.stop();
+                toolStripStatusLabel.Text = "";
             }
             else if (dialogResult == DialogResult.No)
             {
@@ -81,7 +89,7 @@ namespace ProjectMediaPlayer
             {
                 Multiselect = true,
                 //Filter = "MP3|*.mp3"
-                Filter = "WMV|*.wmv|WAV|*wav|MP3|*.mp3|MP4|*.mp4|MKV|*.mkv"
+                Filter = "MP3|*.mp3|WMV|*.wmv|WAV|*wav|MP4|*.mp4|MKV|*.mkv"
             })
             {
                 if (ofd.ShowDialog() == DialogResult.OK)
@@ -92,11 +100,13 @@ namespace ProjectMediaPlayer
                         FileInfo fi = new FileInfo(fileName);
                         string title = Path.GetFileNameWithoutExtension(fi.FullName),
                         path = fi.FullName;
+                        //playlist.AddFirst(title, path);
                         playlist.AddLast(title, path);
-                            
+
                     }
                     Node sorted = playlist.MergeSort(playlist.head);
                     playlist.head = sorted;
+                    listBoxPlaylist.Items.Clear();
                     DisplayPlayList();
                     //listBoxPlaylist.DataSource = playlist;
 
@@ -158,6 +168,7 @@ namespace ProjectMediaPlayer
                 currentSong = selectedPath;
                 axWindowsMediaPlayer.URL = currentSong.path;
                 axWindowsMediaPlayer.Ctlcontrols.play();
+                toolStripStatusLabel.Text = "Now playing : " + currentSong.title;
             }
         }
 
@@ -177,6 +188,26 @@ namespace ProjectMediaPlayer
         {
             //listBoxPlaylist.ValueMember = "path";
             //listBoxPlaylist.DisplayMember = "title";
+        }
+
+        private void ButtonSearch_Click(object sender, EventArgs e)
+        {
+            string target = textSearch.Text;
+            textSearch.Clear();
+            Node selectedSong = playlist.BinarySearch(target);
+            if (selectedSong != null)
+            {
+                listBoxPlaylist.SelectedItem = target;
+                currentSong = selectedSong;
+                axWindowsMediaPlayer.URL = currentSong.path;
+                axWindowsMediaPlayer.Ctlcontrols.play();
+                toolStripStatusLabel.Text = "Now playing : " + currentSong.title;
+            }
+            else
+            {
+                toolStripStatusLabel.Text = target + " not found in the list!";
+                
+            }
         }
     }
 }

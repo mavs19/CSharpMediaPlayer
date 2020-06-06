@@ -46,6 +46,10 @@
             this.buttonLoad = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.buttonSearch = new System.Windows.Forms.Button();
+            this.buttonSort = new System.Windows.Forms.Button();
+            this.buttonClear = new System.Windows.Forms.Button();
+            this.textSearch = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.groupBoxMediaPlayer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer)).BeginInit();
@@ -106,7 +110,7 @@
             this.listBoxPlaylist.FormattingEnabled = true;
             this.listBoxPlaylist.Location = new System.Drawing.Point(503, 28);
             this.listBoxPlaylist.Name = "listBoxPlaylist";
-            this.listBoxPlaylist.Size = new System.Drawing.Size(237, 407);
+            this.listBoxPlaylist.Size = new System.Drawing.Size(237, 355);
             this.listBoxPlaylist.TabIndex = 2;
             this.listBoxPlaylist.SelectedIndexChanged += new System.EventHandler(this.ListBoxPlaylist_SelectedIndexChanged);
             // 
@@ -183,7 +187,7 @@
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonAdd.TabIndex = 9;
-            this.buttonAdd.Text = "Add Songs";
+            this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
             // 
@@ -224,12 +228,55 @@
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
             this.toolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
             // 
+            // buttonSearch
+            // 
+            this.buttonSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSearch.Location = new System.Drawing.Point(503, 419);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(75, 23);
+            this.buttonSearch.TabIndex = 15;
+            this.buttonSearch.Text = "Search";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.ButtonSearch_Click);
+            // 
+            // buttonSort
+            // 
+            this.buttonSort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSort.Location = new System.Drawing.Point(584, 419);
+            this.buttonSort.Name = "buttonSort";
+            this.buttonSort.Size = new System.Drawing.Size(75, 23);
+            this.buttonSort.TabIndex = 13;
+            this.buttonSort.Text = "Sort";
+            this.buttonSort.UseVisualStyleBackColor = true;
+            // 
+            // buttonClear
+            // 
+            this.buttonClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonClear.Location = new System.Drawing.Point(665, 419);
+            this.buttonClear.Name = "buttonClear";
+            this.buttonClear.Size = new System.Drawing.Size(75, 23);
+            this.buttonClear.TabIndex = 12;
+            this.buttonClear.Text = "Clear";
+            this.buttonClear.UseVisualStyleBackColor = true;
+            // 
+            // textSearch
+            // 
+            this.textSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.textSearch.Location = new System.Drawing.Point(503, 393);
+            this.textSearch.Name = "textSearch";
+            this.textSearch.Size = new System.Drawing.Size(237, 20);
+            this.textSearch.TabIndex = 14;
+            // 
             // FormMediaPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(752, 504);
+            this.Controls.Add(this.textSearch);
+            this.Controls.Add(this.buttonClear);
+            this.Controls.Add(this.buttonSort);
+            this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.buttonLoad);
             this.Controls.Add(this.buttonSave);
@@ -277,6 +324,10 @@
         private System.Windows.Forms.Button buttonLoad;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        private System.Windows.Forms.Button buttonSearch;
+        private System.Windows.Forms.Button buttonSort;
+        private System.Windows.Forms.Button buttonClear;
+        private System.Windows.Forms.TextBox textSearch;
     }
 }
 

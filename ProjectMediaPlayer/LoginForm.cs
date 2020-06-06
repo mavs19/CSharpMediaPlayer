@@ -37,7 +37,7 @@ namespace ProjectMediaPlayer
 
             };
             userRepo.AddUser(user);
-            toolStripStatusLabel.Text = "User : " + username + " created";
+            //toolStripStatusLabel.Text = "User : " + username + " created";
             MessageBox.Show("Username : " + username + " created.\n" +
                 "Salt : " + salt + "\n" + "Password Hash : " + passwordHash);
             textUsername.Clear();
@@ -52,14 +52,14 @@ namespace ProjectMediaPlayer
             bool result = pwManager.IsPasswordMatch(password, user.Salt, user.PasswordHash);
             if (result)
             {
-                toolStripStatusLabel.Text += "Login successfull";
+                //toolStripStatusLabel.Text += "Login successfull";
                 this.Hide();
                 FormMediaPlayer formMediaPlayer = new FormMediaPlayer();
                 formMediaPlayer.ShowDialog();
             }
             else
             {
-                toolStripStatusLabel.Text += "Username or password incorrect, try again.";
+                MessageBox.Show("Username or password incorrect, try again.");
             }
             textUsername.Clear();
             textPassword.Clear();
@@ -78,6 +78,12 @@ namespace ProjectMediaPlayer
 
             };
             userRepo.AddUser(user);
+        }
+
+        private void ButtonClear_Click(object sender, EventArgs e)
+        {
+            textUsername.Clear();
+            textPassword.Clear();
         }
     }
 }
