@@ -12,8 +12,8 @@ namespace ProjectMediaPlayer
         // The String title and path are the song attributes
         public Node prev;
         public Node next;
-        public string title { get; set; }
-        public string path { get; set; }
+        public string Title { get; set; }
+        public string Path { get; set; }
 
         // Default constructor
         public Node()
@@ -23,46 +23,40 @@ namespace ProjectMediaPlayer
         // Overloaded constructor accepting the song attributes
         public Node(string title, string path)
         {
-            this.title = title;
-            this.path = path;
+            this.Title = title;
+            this.Path = path;
         }
 
         // Getters and setters
-        public string getTitle()
+        public string GetTitle()
         {
-            return title;
+            return Title;
         }
 
-        public string getPath()
-        {
-            return path;
-        }
+        //public string getPath()
+        //{
+        //    return Path;
+        //}
 
-        public void setTitle(string title)
-        {
-            this.title = title;
-        }
+        //public void setTitle(string title)
+        //{
+        //    this.Title = title;
+        //}
 
-        public void setPath(string path)
-        {
-            this.path = path;
-        }
+        //public void setPath(string path)
+        //{
+        //    this.Path = path;
+        //}
 
-        public Node getPrev()
-        {
-            return prev;
-        }
+        //public Node getPrev()
+        //{
+        //    return prev;
+        //}
 
-        public Node getNext()
-        {
-            return next;
-        }
+        //public Node getNext()
+        //{
+        //    return next;
+        //}
 
-    //    // Overriding the toString method to dispaly title only in list view
-    //    @Override
-    //public String toString()
-    //    {
-    //        return title;
-    //    }
     }
 }

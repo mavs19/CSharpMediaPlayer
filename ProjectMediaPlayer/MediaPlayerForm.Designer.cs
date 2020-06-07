@@ -31,7 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMediaPlayer));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.userToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.signOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearPlaylistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxMediaPlayer = new System.Windows.Forms.GroupBox();
             this.axWindowsMediaPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             this.listBoxPlaylist = new System.Windows.Forms.ListBox();
@@ -48,7 +49,7 @@
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.buttonSort = new System.Windows.Forms.Button();
-            this.buttonClear = new System.Windows.Forms.Button();
+            this.buttonShuffle = new System.Windows.Forms.Button();
             this.textSearch = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.groupBoxMediaPlayer.SuspendLayout();
@@ -69,16 +70,25 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.userToolStripMenuItem});
+            this.signOutToolStripMenuItem,
+            this.clearPlaylistToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // userToolStripMenuItem
+            // signOutToolStripMenuItem
             // 
-            this.userToolStripMenuItem.Name = "userToolStripMenuItem";
-            this.userToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
-            this.userToolStripMenuItem.Text = "User";
+            this.signOutToolStripMenuItem.Name = "signOutToolStripMenuItem";
+            this.signOutToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.signOutToolStripMenuItem.Text = "Sign Out";
+            this.signOutToolStripMenuItem.Click += new System.EventHandler(this.SignOutToolStripMenuItem_Click);
+            // 
+            // clearPlaylistToolStripMenuItem
+            // 
+            this.clearPlaylistToolStripMenuItem.Name = "clearPlaylistToolStripMenuItem";
+            this.clearPlaylistToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.clearPlaylistToolStripMenuItem.Text = "Clear Playlist";
+            this.clearPlaylistToolStripMenuItem.Click += new System.EventHandler(this.ClearPlaylistToolStripMenuItem_Click);
             // 
             // groupBoxMediaPlayer
             // 
@@ -248,16 +258,18 @@
             this.buttonSort.TabIndex = 13;
             this.buttonSort.Text = "Sort";
             this.buttonSort.UseVisualStyleBackColor = true;
+            this.buttonSort.Click += new System.EventHandler(this.ButtonSort_Click);
             // 
-            // buttonClear
+            // buttonShuffle
             // 
-            this.buttonClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClear.Location = new System.Drawing.Point(665, 419);
-            this.buttonClear.Name = "buttonClear";
-            this.buttonClear.Size = new System.Drawing.Size(75, 23);
-            this.buttonClear.TabIndex = 12;
-            this.buttonClear.Text = "Clear";
-            this.buttonClear.UseVisualStyleBackColor = true;
+            this.buttonShuffle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonShuffle.Location = new System.Drawing.Point(665, 419);
+            this.buttonShuffle.Name = "buttonShuffle";
+            this.buttonShuffle.Size = new System.Drawing.Size(75, 23);
+            this.buttonShuffle.TabIndex = 12;
+            this.buttonShuffle.Text = "Shuffle";
+            this.buttonShuffle.UseVisualStyleBackColor = true;
+            this.buttonShuffle.Click += new System.EventHandler(this.ButtonShuffle_Click);
             // 
             // textSearch
             // 
@@ -274,7 +286,7 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(752, 504);
             this.Controls.Add(this.textSearch);
-            this.Controls.Add(this.buttonClear);
+            this.Controls.Add(this.buttonShuffle);
             this.Controls.Add(this.buttonSort);
             this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.statusStrip1);
@@ -293,7 +305,6 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMediaPlayer";
             this.Text = "Media Player";
-            this.Load += new System.EventHandler(this.FormMediaPlayer_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBoxMediaPlayer.ResumeLayout(false);
@@ -309,7 +320,7 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem userToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem signOutToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBoxMediaPlayer;
         private System.Windows.Forms.ListBox listBoxPlaylist;
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer;
@@ -326,8 +337,9 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.Button buttonSort;
-        private System.Windows.Forms.Button buttonClear;
+        private System.Windows.Forms.Button buttonShuffle;
         private System.Windows.Forms.TextBox textSearch;
+        private System.Windows.Forms.ToolStripMenuItem clearPlaylistToolStripMenuItem;
     }
 }
 

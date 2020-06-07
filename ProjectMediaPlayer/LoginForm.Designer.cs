@@ -66,7 +66,7 @@
             // 
             // btnSignIn
             // 
-            this.btnSignIn.Location = new System.Drawing.Point(13, 160);
+            this.btnSignIn.Location = new System.Drawing.Point(13, 148);
             this.btnSignIn.Name = "btnSignIn";
             this.btnSignIn.Size = new System.Drawing.Size(206, 29);
             this.btnSignIn.TabIndex = 3;
@@ -94,7 +94,7 @@
             // 
             // buttonClear
             // 
-            this.buttonClear.Location = new System.Drawing.Point(13, 205);
+            this.buttonClear.Location = new System.Drawing.Point(13, 183);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(206, 29);
             this.buttonClear.TabIndex = 6;
@@ -106,7 +106,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(235, 255);
+            this.ClientSize = new System.Drawing.Size(235, 225);
             this.Controls.Add(this.buttonClear);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

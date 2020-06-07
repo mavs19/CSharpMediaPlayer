@@ -18,12 +18,13 @@ namespace ProjectMediaPlayer
         {
             try
             {
-                return users.Single(u => u.UserId == userid);
+                return users.Single(u => u.Username == userid);
             }
             catch
             {
                 return users.First();
             }
         }
+
     }
 }
